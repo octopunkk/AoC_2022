@@ -1,0 +1,28 @@
+const fs = require("fs");
+const input = fs.readFileSync("input.txt", { encoding: "utf8" }).split("\r\n");
+
+let stacks = [];
+input.forEach((line) => {
+  // create stacks array
+  const cratesRegex = /[A-Z]/g;
+  const crates = [...line.matchAll(cratesRegex)];
+  crates.forEach((crate) => {
+    stackIndex = Math.floor(crate.index / 4);
+    stacks[stackIndex]
+      ? stacks[stackIndex].push(crate[0])
+      : (stacks[stackIndex] = [crate[0]]);
+  });
+  // start moving crates
+  const moveRegex = /move (\d+) from (\d+) to (\d+)/g;
+  const moves = [...line.matchAll(moveRegex)];
+  moves.forEach((move) => {
+    const numOfCrates = Number(move[1]);
+    const from = Number(move[2]) - 1;
+    const to = Number(move[3]) - 1;
+    const stackMoved = stacks[from].splice(0, numOfCrates);
+    stacks[to].unshift(stackMoved);
+    stacks[to] = stacks[to].flat();
+  });
+});
+const message = stacks.map((stack) => stack[0]);
+console.log(message.join(""));
