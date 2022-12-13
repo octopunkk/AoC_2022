@@ -1,6 +1,8 @@
 const fs = require("fs");
 const input = fs.readFileSync("input.txt", { encoding: "utf8" }).split("\r\n");
 
+console.time("Part 1");
+
 let start = {
   x: 0,
   y: 0,
@@ -84,3 +86,4 @@ const dijkstra = (start, end) => {
 };
 
 console.log(dijkstra(start, end));
+console.timeEnd("Part 1");

@@ -1,5 +1,7 @@
 const fs = require("fs");
+const { timeout } = require("nodemon/lib/config");
 const input = fs.readFileSync("input.txt", { encoding: "utf8" }).split("\r\n");
+console.time("Part 2");
 
 let starts = [];
 let end = {
@@ -91,3 +93,4 @@ starts.forEach((start) => {
   }
 });
 console.log(smallestHike);
+console.timeEnd("Part 2");
