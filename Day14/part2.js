@@ -2,7 +2,6 @@ const fs = require("fs");
 const input = fs.readFileSync("input.txt", { encoding: "utf8" }).split("\r\n");
 let cave = [];
 let bottomRock = -Infinity;
-
 input.forEach((element) => {
   let regex = /(\d+)/g;
   let match = element.match(regex);
@@ -30,9 +29,7 @@ input.forEach((element) => {
     }
   }
 });
-
 let reachedTop = false;
-
 const sandDestination = (x, y) => {
   if (x === bottomRock + 1) {
     return [x, y];
@@ -46,7 +43,6 @@ const sandDestination = (x, y) => {
   }
   return [x, y];
 };
-
 let sumOfSand = 0;
 while (!reachedTop) {
   let sand = [0, 500];
